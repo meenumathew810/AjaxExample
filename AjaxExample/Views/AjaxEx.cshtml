@@ -1,0 +1,26 @@
+﻿@model AjaxExample.Models.User
+@{
+    ViewBag.Title = "AjaxEx";
+}
+
+<h2>AjaxEx</h2>
+
+<div>
+    @Html.LabelFor(model=> Model.Name)
+    @Html.TextBoxFor(model=> Model.Name, new { @class ="suyati", @id="MyName"})
+    @Html.LabelFor(model => Model.Age)
+    @Html.TextBoxFor(model => Model.Age, new { @class = "text", @id = "MyAge" })
+    <button id="btnsmt">Submit</button>
+</div>
+<script>
+    jQuery("#btnsmt").on("click", function () {
+        jQuery.ajax({
+            url:"/Form/Add/",
+            data:JSON.stringify({User:{name:jQuery("#MyName").value(),age:jQuery("#MyAge").value()}}),
+            dataType:"json",
+            contentType:"application/json:charset-utf-8",
+            type:"Post"
+        }
+    )});
+</script>
+
